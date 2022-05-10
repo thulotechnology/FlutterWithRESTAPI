@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:quotes_app_with_api/screens/home_page.dart';
 
 void main() {
@@ -10,9 +11,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Quotes App",
-      home: HomePage(),
+    return OKToast(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Quotes App",
+        home: HomePage(),
+      ),
     );
   }
 }

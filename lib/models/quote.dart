@@ -1,30 +1,53 @@
-import 'data.dart';
-import 'meta.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 
 class Quote {
-  List<Data>? data;
-  Meta? meta;
+  final String title;
+  final String from;
+  Quote({
+    required this.title,
+    required this.from,
+  });
 
-  Quote({this.data, this.meta});
-
-  Quote.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
-    meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;
+  Quote copyWith({
+    String? title,
+    String? from,
+  }) {
+    return Quote(
+      title: title ?? this.title,
+      from: from ?? this.from,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    if (this.meta != null) {
-      data['meta'] = this.meta!.toJson();
-    }
-    return data;
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'title': title,
+      'from': from,
+    };
   }
+
+  factory Quote.fromMap(Map<String, dynamic> map) {
+    return Quote(
+      title: map['title'] as String,
+      from: map['from'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Quote.fromJson(String source) =>
+      Quote.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() => 'Quote(title: $title, from: $from)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Quote && other.title == title && other.from == from;
+  }
+
+  @override
+  int get hashCode => title.hashCode ^ from.hashCode;
 }
