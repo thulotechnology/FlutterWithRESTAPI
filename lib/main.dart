@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OKToast(
+    return const OKToast(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Quotes App",

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:quotes_app_with_api/models/quote.dart';
-import 'package:quotes_app_with_api/screens/add_update_quote.dart';
 import 'package:quotes_app_with_api/services/api_services.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -13,7 +13,6 @@ class _HomePageState extends State<HomePage> {
   late Future<Quote> futureQuotes;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     futureQuotes = APIService.getQuotes();
   }
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Motivational Quotes"),
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: () {
               refresh();
             },
@@ -68,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                 },
               );
             }
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }),
     );
   }

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:quotes_app_with_api/models/quote.dart';
+import 'package:quotes_app_with_api/models/attribute.dart';
 
 import '../services/api_services.dart';
 
 class AddorUpdateQuote extends StatelessWidget {
   final bool isAdded;
-  late Attributes a;
-  AddorUpdateQuote(this.isAdded, {required this.a});
-
-  TextEditingController cTitle = TextEditingController();
-  TextEditingController cFrom = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final Attributes a;
+  const AddorUpdateQuote(this.isAdded, {Key? key, required this.a})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController cTitle = TextEditingController();
+    TextEditingController cFrom = TextEditingController();
+    final _formKey = GlobalKey<FormState>();
     if (!isAdded) {
       cTitle.text = a.title;
       cFrom.text = a.from;
