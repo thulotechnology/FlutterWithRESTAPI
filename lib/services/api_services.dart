@@ -23,26 +23,26 @@ class APIService {
     }
   }
 
-//   static Future<bool> addQuote(Datum d) async {
-//     final url = Uri.parse("$apiURL/data");
-//     String mybody = """
-//   {
-//   "data": {
-//     "title": "${d.attributes.title}",
-//     "from": "${d.attributes.from}",
-//   }
-// }
-// """;
-//     final response =
-//         await http.post(url, body: mybody, headers: <String, String>{
-//       'Content-Type': 'application/json; charset=UTF-8',
-//     });
-//     print('Response status: ${response.statusCode}');
-//     print('Response body: ${response.body}');
-//     if (response.statusCode == 200) {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   }
+  static Future<bool> addQuote(Attributes a) async {
+    final url = Uri.parse("$apiURL/quotes");
+    String mybody = """
+  {
+  "data": {
+    "title": "${a.title}",
+    "from": "${a.from}",
+  }
+}
+""";
+    final response =
+        await http.post(url, body: mybody, headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

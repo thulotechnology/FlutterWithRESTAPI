@@ -48,16 +48,16 @@ class Attributes {
   Attributes({
     required this.title,
     required this.from,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.publishedAt,
+    this.createdAt,
+    this.updatedAt,
+    this.publishedAt,
   });
 
   final String title;
   final String from;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final DateTime publishedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  DateTime? publishedAt;
 
   factory Attributes.fromJson(Map<String, dynamic> json) => Attributes(
         title: json["title"],
@@ -70,9 +70,10 @@ class Attributes {
   Map<String, dynamic> toJson() => {
         "title": title,
         "from": from,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "publishedAt": publishedAt.toIso8601String(),
+        "createdAt": createdAt == null ? null : createdAt!.toIso8601String(),
+        "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
+        "publishedAt":
+            publishedAt == null ? null : publishedAt!.toIso8601String(),
       };
 }
 
