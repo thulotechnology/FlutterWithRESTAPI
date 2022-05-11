@@ -5,9 +5,9 @@ import '../services/api_services.dart';
 
 class AddorUpdateQuote extends StatelessWidget {
   final bool isAdded;
-  final Attributes a;
-  const AddorUpdateQuote(this.isAdded, {Key? key, required this.a})
-      : super(key: key);
+  Attributes? a;
+  int? id;
+  AddorUpdateQuote(this.isAdded, {this.a, this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,8 @@ class AddorUpdateQuote extends StatelessWidget {
     TextEditingController cFrom = TextEditingController();
     final _formKey = GlobalKey<FormState>();
     if (!isAdded) {
-      cTitle.text = a.title;
-      cFrom.text = a.from;
+      cTitle.text = a!.title;
+      cFrom.text = a!.from;
     }
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +54,11 @@ class AddorUpdateQuote extends StatelessWidget {
                         bool result = await APIService.addQuote(
                             Attributes(title: cTitle.text, from: cFrom.text));
                         Navigator.pop(context, result);
-                      } else {}
+                      } else {
+                        bool result = await APIService.updateQuote(id!,
+                            Attributes(title: cTitle.text, from: cFrom.text));
+                        Navigator.pop(context, result);
+                      }
                     }
                   },
                   child: isAdded ? const Text("Add") : const Text("Update"))
