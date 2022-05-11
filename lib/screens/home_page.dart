@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<Quote>> futureQuotes;
+  late Future<Quote> futureQuotes;
   @override
   void initState() {
     // TODO: implement initState
@@ -40,30 +40,30 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          var result = await Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => AddorUpdateQuote(
-                      true,
-                      q: Quote(title: "", from: ""),
-                    )),
-          );
-          if (result == true) {
-            showToast("Quote Added successfully");
-            refresh();
-          }
+          // var result = await Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => AddorUpdateQuote(
+          //             true,
+          //             q: Quote(title: "", from: ""),
+          //           )),
+          // );
+          // if (result == true) {
+          //   showToast("Quote Added successfully");
+          //   refresh();
+          // }
         },
       ),
-      body: FutureBuilder<List<Quote>>(
+      body: FutureBuilder<Quote>(
           future: futureQuotes,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
-                itemCount: snapshot.data!.length,
+                itemCount: snapshot.data!.data.length,
                 itemBuilder: (contxt, index) {
                   return ListTile(
-                    title: Text(snapshot.data![index].title),
-                    subtitle: Text(snapshot.data![index].from),
+                    title: Text(snapshot.data!.data[index].attributes.title),
+                    subtitle: Text(snapshot.data!.data[index].attributes.from),
                   );
                 },
               );
